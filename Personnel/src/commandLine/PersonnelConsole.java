@@ -260,10 +260,19 @@ public class PersonnelConsole
 		}
 	}
 	
+	private boolean verifiePassword()
+	{
+		boolean ok = gestionPersonnel.getRoot().checkPassword(Util.saisieString("password : "));
+		if (!ok)
+			System.out.println("Password incorrect.");
+		return ok;
+	}
+	
 	public static void main(String[] args)
 	{
 		PersonnelConsole personnelConsole = 
 				new PersonnelConsole(GestionPersonnel.getGestionPersonnel());
-		personnelConsole.menuPrincipal();
+		if (personnelConsole.verifiePassword())
+			personnelConsole.menuPrincipal();
 	}
 }
