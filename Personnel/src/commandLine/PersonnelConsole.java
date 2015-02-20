@@ -249,6 +249,15 @@ public class PersonnelConsole
 			}
 		}
 		while(saisie != QUITTER);
+		try
+		{
+			gestionPersonnel.sauvegarder();
+		}
+		catch (SauvegardeImpossible e) 
+		{
+			System.out.println("Une erreur s'est produite, le fichier n'a"
+					+ "pas été sauvegardé.");
+		}
 	}
 	
 	public static void main(String[] args)
