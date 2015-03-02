@@ -31,6 +31,7 @@ public class GestionPersonnel implements Serializable
 	/**
 	 * Retourne l'unique instance de cette classe.
 	 * Crée cet objet s'il n'existe déjà.
+	 * @return l'unique objet de type {@link GestionPersonnel}.
 	 */
 	
 	public static GestionPersonnel getGestionPersonnel()
@@ -72,7 +73,7 @@ public class GestionPersonnel implements Serializable
 	/**
 	 * Sauvegarde le gestionnaire pour qu'il soit ouvert automatiquement 
 	 * lors d'une exécution ultérieure du programme.
-	 * @throws SauvegardeImpossible 
+	 * @throws SauvegardeImpossible Si le support de sauvegarde est inaccessible.
 	 */
 	
 	public void sauvegarder() throws SauvegardeImpossible
@@ -107,6 +108,8 @@ public class GestionPersonnel implements Serializable
 	/**
 	 * Retourne la ligue dont administrateur est l'administrateur,
 	 * null s'il n'est pas un administrateur.
+	 * @param administrateur l'administrateur de la ligue recherchée.
+	 * @return la ligue dont administrateur est l'administrateur.
 	 */
 	
 	public Ligue getLigue(Employe administrateur)
@@ -119,6 +122,7 @@ public class GestionPersonnel implements Serializable
 
 	/**
 	 * Retourne toutes les ligues enregistrées.
+	 * @return toutes les ligues enregistrées.
 	 */
 	
 	public SortedSet<Ligue> getLigues()
@@ -140,6 +144,7 @@ public class GestionPersonnel implements Serializable
 
 	/**
 	 * Retourne le root (super-utilisateur).
+	 * @return le root.
 	 */
 	
 	public Employe getRoot()

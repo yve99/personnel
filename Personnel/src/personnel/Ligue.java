@@ -9,7 +9,8 @@ import java.util.TreeSet;
  * Représente une ligue. Chaque ligue est reliée à une liste
  * d'employés dont un administrateur. Comme il n'est pas possible
  * de créer un employé sans l'affecter à une ligue, le root est 
- * l'administrateur de la ligue jusqu'à ce qu'un employé lui ait été affecté.
+ * l'administrateur de la ligue jusqu'à ce qu'un administrateur 
+ * lui ait été affecté avec la fonction {@link #setAdministrateur}.
  */
 
 public class Ligue implements Serializable, Comparable<Ligue>
@@ -21,6 +22,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	
 	/**
 	 * Crée une ligue.
+	 * @param nom le nom de la ligue.
 	 */
 	
 	public Ligue(String nom)
@@ -32,7 +34,8 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	}
 
 	/**
-	 * Retourne le nom.
+	 * Retourne le nom de la ligue.
+	 * @return le nom de la ligue.
 	 */
 
 	public String getNom()
@@ -42,6 +45,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 
 	/**
 	 * Change le nom.
+	 * @param nom le nouveau nom de la ligue.
 	 */
 
 	public void setNom(String nom)
@@ -51,6 +55,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 
 	/**
 	 * Retourne l'administrateur de la ligue.
+	 * @return l'administrateur de la ligue.
 	 */
 	
 	public Employe getAdministrateur()
@@ -63,6 +68,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * Lève DroitsInsuffisants si l'administrateur n'est pas 
 	 * un employé de la ligue. Révoque les droits de l'ancien 
 	 * administrateur.
+	 * @param administrateur le nouvel administrateur de la ligue.
 	 */
 	
 	public void setAdministrateur(Employe administrateur)
@@ -74,6 +80,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 
 	/**
 	 * Retourne les employés de la ligue.
+	 * @return les employés de la ligue dans l'ordre alphabétique.
 	 */
 	
 	public SortedSet<Employe> getEmployes()
@@ -84,11 +91,18 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Ajoute un employé dans la ligue. Cette méthode 
 	 * est le seul moyen de créer un employé.
+	 * @param nom le nom de l'employé.
+	 * @param prenom le prénom de l'employé.
+	 * @param mail l'adresse mail de l'employé.
+	 * @param password le password de l'employé.
+	 * @return l'employé créé. 
 	 */
 
-	public void addEmploye(String nom, String prenom, String mail, String password)
+	public Employe addEmploye(String nom, String prenom, String mail, String password)
 	{
-		employes.add(new Employe(this, nom, prenom, mail, password));
+		Employe employe = new Employe(this, nom, prenom, mail, password);
+		employes.add(employe);
+		return employe;
 	}
 	
 	void remove(Employe employe)
@@ -97,7 +111,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	}
 	
 	/**
-	 * Supprime une ligue, entraîne la suppression de tous les employés
+	 * Supprime la ligue, entraîne la suppression de tous les employés
 	 * de la ligue.
 	 */
 	
