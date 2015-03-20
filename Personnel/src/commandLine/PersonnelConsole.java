@@ -4,265 +4,363 @@ import java.util.ArrayList;
 import java.util.List;
 
 import personnel.*;
+import utilitaires.ligneDeCommande.*;
+import static utilitaires.EntreesSorties.*;
 
 public class PersonnelConsole
 {
 	private GestionPersonnel gestionPersonnel;
-	private final static char 
-		QUITTER = 'q', 
-		GERE_COMPTE_ROOT = 'c',
-		GERE_LIGUES = 'l', 
-		AFFICHER = 'a', 
-		MODIFIER = 'm', 
-		AJOUTER = 'c', 
-		SUPPRIMER = 's', 
-		SELECTIONNER_LIGUE = 'm',
-		GERER_EMPLOYES = 'e',
-		CHANGER_ADMINISTRATEUR = 'x',
-		CHANGER_NOM = 'n',
-		CHANGER_PRENOM = 'p',
-		CHANGER_MAIL = 'm',
-		CHANGER_PASSWORD = 'x';
-	private final static String 
-		MENU_PRINCIPAL = 
-			"c : Gérer le compte administrateur\nl : Gérer les ligues\n"
-			+ "q : quitter", 
-		MENU_LIGUES = "a : afficher\nc : ajouter\ns : supprimer\n"
-				+ "m : sélectionner une ligue\nq : revenir",
-		MENU_LIGUE = "a : afficher\ne : gérer les employés\nn : changer le nom\n"
-				+ "x : changer d'administrateur\nq : revenir",	
-		MENU_EMPLOYES = "a : afficher\nc : ajouter\ns : supprimer\n"
-				+ "m : modifier\nq : revenir",
-		MENU_COMPTE_ROOT = "a : afficher\nn : changer nom\np : changer prénom\n"
-					+ "m : changer mail\nx : changer password\n"
-					+ "q : revenir\n",
-		MENU_COMPTE = MENU_COMPTE_ROOT + "s : supprimer\n",
-		DOT_LINE = "---------------------------";
 	
 	public PersonnelConsole(GestionPersonnel gestionPersonnel)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 	}
 	
-	private <T> void afficher(List<T> liste)
+	public void start()
 	{
-		int i = 0;
-		System.out.println(DOT_LINE);
-		for(T item : liste)
-			System.out.println(i++ + " : " + item);
-		System.out.println(DOT_LINE);
+		menuPrincipal().start();
 	}
 	
-	private <T> int selection(List<T> liste)
+	private Menu menuPrincipal()
 	{
-		afficher(liste);
-		try
-		{
-			return Util.saisieInt("Indice : ");
-		}
-		catch(Exception e)
-		{
-			System.out.println("Erreur de saisie");
-			return -1;
-		}		
-	}
-	
-	private void afficher(Ligue ligue)
-	{
-		System.out.println(DOT_LINE);
-		System.out.println(ligue);
-		System.out.println("administrée par " + ligue.getAdministrateur());
-		System.out.println(DOT_LINE);
+		Menu menu = new Menu("Gestion du personnel des ligues");
+		menu.ajoute(editerEmploye(gestionPersonnel.getRoot()));
+		menu.ajoute(menuLigues());
+		menu.ajoute(menuQuitter());
+		return menu;
 	}
 
-	private void ajouterEmploye(Ligue ligue)
+	private Menu menuQuitter()
 	{
-		ligue.addEmploye(Util.saisieString("nom : "), Util.saisieString("prénom : "), 
-				Util.saisieString("mail : "), Util.saisieString("password :"));
+		Menu menu = new Menu("Quitter", "q");
+		menu.ajoute(quitterEtEnregistrer());
+		menu.ajoute(quitterSansEnregistrer());
+		menu.ajouteRevenir("r");
+		return menu;
+	}
+	
+	private Menu menuLigues()
+	{
+		Menu menu = new Menu("Gérer les ligues", "l");
+		menu.ajoute(afficherLigues());
+		menu.ajoute(ajouterLigue());
+		menu.ajoute(selectionnerLigue());
+		menu.ajoute(supprimerLigue());
+		menu.ajouteRevenir("q");
+		return menu;
 	}
 
-	private void modifierEmploye(List<Employe> employes)
+	private Option afficherLigues()
 	{
-		menuCompte(employes.get(selection(employes)));
-	}
-	
-	private void supprimerEmploye(List<Employe> employes)
-	{
-		employes.get(selection(employes)).remove();
-	}
-	
-	private void menuEmployes(Ligue ligue)
-	{
-		char saisie;
-		do
+		Option option = new Option("Afficher les ligues", "l");
+		option.setAction(new Action()
 		{
-			List<Employe> employes = new ArrayList<>(ligue.getEmployes());
-			saisie = Util.saisieChar(MENU_EMPLOYES);
-			switch(saisie)
+			@Override
+			public void optionSelectionnee()
 			{
-				case QUITTER : break;
-				case AFFICHER : afficher(employes) ; break;
-				case AJOUTER : ajouterEmploye(ligue) ; break;
-				case MODIFIER : modifierEmploye(employes) ; break;
-				case SUPPRIMER : supprimerEmploye(employes) ; break;
-				default : System.out.println("Erreur de saisie");
+				System.out.println(gestionPersonnel.getLigues());
 			}
-		}
-		while(saisie != QUITTER);				
+		});
+		return option;
 	}
 	
-	private void changerNom(Ligue ligue)
+	private Option afficherEmployes(final Ligue ligue)
 	{
-		ligue.setNom(Util.saisieString("Nouveau nom : "));
-	}
-	
-	private void changerAdministrateur(Ligue ligue)
-	{
-		List<Employe> employes = new ArrayList<>(ligue.getEmployes());
-		int indice = selection(employes);
-		Employe administrateur = employes.get(indice);
-		ligue.setAdministrateur(administrateur);
-	}
-	
-	private void menuLigue(Ligue ligue)
-	{
-		char saisie;
-		do
+		Option option = new Option("Afficher les employes", "l");
+		option.setAction(new Action()
 		{
-			saisie = Util.saisieChar(MENU_LIGUE);
-			switch(saisie)
+			@Override
+			public void optionSelectionnee()
 			{
-				case QUITTER : break;
-				case AFFICHER : afficher(ligue) ; break;
-				case GERER_EMPLOYES : menuEmployes(ligue) ; break;
-				case CHANGER_ADMINISTRATEUR : changerAdministrateur(ligue) ; break;
-				case CHANGER_NOM : changerNom(ligue); break;
-				default : System.out.println("Erreur de saisie");
+				System.out.println(ligue.getEmployes());
 			}
-		}
-		while(saisie != QUITTER && saisie != SUPPRIMER);		
+		});
+		return option;
+	}
+	
+	private Option afficher(final Ligue ligue)
+	{
+		Option option = new Option("Afficher la ligue", "l");
+		option.setAction(new Action()
+		{
+			@Override
+			public void optionSelectionnee()
+			{
+				System.out.println(ligue);
+				System.out.println("administrée par " + ligue.getAdministrateur());
+			}
+		});
+		return option;
 	}
 
-	private void ajouterLigue(List<Ligue> ligues)
+	private Option afficher(final Employe employe)
 	{
-		new Ligue (Util.saisieString("nom : "));		
-	}
-	
-	private void supprimerLigue(List<Ligue> ligues)
-	{
-		ligues.get(selection(ligues)).remove();
-	}
-	
-	private void selectionnerLigue(List<Ligue> ligues)
-	{
-		menuLigue(ligues.get(selection(ligues)));
-	}
-	
-	private void menuLigues()
-	{
-		char saisie;
-		do
+		Option option = new Option("Afficher l'employé", "l");
+		option.setAction(new Action()
 		{
-			List<Ligue> ligues = new ArrayList<>(gestionPersonnel.getLigues());
-			saisie = Util.saisieChar(MENU_LIGUES);
-			switch(saisie)
+			@Override
+			public void optionSelectionnee()
 			{
-				case QUITTER : break;
-				case AFFICHER : afficher(ligues) ; break;
-				case AJOUTER : ajouterLigue(ligues) ; break;
-				case SELECTIONNER_LIGUE: selectionnerLigue(ligues) ; break;
-				case SUPPRIMER : supprimerLigue(ligues) ; break;
-				default : System.out.println("Erreur de saisie");
+				System.out.println(employe);
 			}
-		}
-		while(saisie != QUITTER);		
+		});
+		return option;
 	}
-	
-	private void afficher(Employe employe)
+
+	private Option ajouterLigue()
 	{
-		System.out.println(DOT_LINE + '\n' + employe + '\n' + DOT_LINE);
-	}
-	
-	private void changerNom(Employe employe)
-	{
-		employe.setNom(Util.saisieString("Nouveau nom : "));
-	}
-	
-	private void changerPrenom(Employe employe)
-	{
-		employe.setPrenom(Util.saisieString("Nouveau prénom : "));
-	}
-	
-	private void changerMail(Employe employe)
-	{
-		employe.setMail(Util.saisieString("Nouveau mail : "));
-	}
-	
-	private void changerPassword(Employe employe)
-	{
-		employe.setPassword(Util.saisieString("Nouveau password : "));
-	}
-	
-	private void supprimerCompte(Employe employe)
-	{
-		employe.remove();
-	}
-	
-	private void menuCompte(Employe employe)
-	{
-		char saisie;
-		boolean root = employe.estRoot();
-		do
+		Option option = new Option("Ajouter une ligue", "a");
+		option.setAction(new Action()
 		{
-			saisie = Util.saisieChar((root) ? MENU_COMPTE_ROOT : MENU_COMPTE);
-			switch(saisie)
+			@Override
+			public void optionSelectionnee()
 			{
-				case QUITTER : break;
-				case AFFICHER : afficher(employe) ; break;
-				case CHANGER_NOM : changerNom(employe); break;
-				case CHANGER_PRENOM : changerPrenom(employe); break;
-				case CHANGER_MAIL: changerMail(employe); break;
-				case CHANGER_PASSWORD : changerPassword(employe); break;
-				case SUPPRIMER : 
-					if (!root)
+				new Ligue (getString("nom : "));						
+			}
+		});
+		return option;
+	}
+	
+	private Option ajouterEmploye(final Ligue ligue)
+	{
+		Option option = new Option("Ajouter un employé", "a");
+		option.setAction(new Action()
+		{
+			@Override
+			public void optionSelectionnee()
+			{
+				ligue.addEmploye(getString("nom : "), 
+						getString("prenom : "), getString("mail : "), 
+						getString("password : "));
+			}
+		});
+		return option;
+	}
+	
+	private Menu editerLigue(Ligue ligue)
+	{
+		Menu menu = new Menu("Editer " + ligue.getNom());
+		menu.ajoute(afficher(ligue));
+		menu.ajoute(gererEmployes(ligue));
+		menu.ajoute(changerAdministrateur(ligue));
+		menu.ajoute(changerNom(ligue));
+		menu.ajouteRevenir("q");
+		return menu;
+	}
+
+	private Menu editerEmploye(Employe employe)
+	{
+		Menu menu = new Menu("Gérer le compte " + employe.getNom(), "c");
+		menu.ajoute(afficher(employe));
+		menu.ajoute(changerNom(employe));
+		menu.ajoute(changerPrenom(employe));
+		menu.ajoute(changerMail(employe));
+		menu.ajoute(changerPassword(employe));
+		menu.ajouteRevenir("q");
+		return menu;
+	}
+
+	private Menu gererEmployes(Ligue ligue)
+	{
+		Menu menu = new Menu("Gérer les employés de " + ligue.getNom(), "e");
+		menu.ajoute(afficherEmployes(ligue));
+		menu.ajoute(ajouterEmploye(ligue));
+		menu.ajoute(modifierEmploye(ligue));
+		menu.ajoute(supprimerEmploye(ligue));
+		menu.ajouteRevenir("q");
+		return menu;
+	}
+
+	private Liste<Employe> modifierEmploye(final Ligue ligue)
+	{
+		return new Liste<>("Modifier un employé", "e", 
+				new ActionListe<Employe>()
+		{
+			@Override
+			public List<Employe> getListe()
+			{
+				return new ArrayList<>(ligue.getEmployes());
+			}
+			@Override
+			public void elementSelectionne(int indice, Employe element)
+			{
+				editerEmploye(element);
+			}
+		});
+	}
+	
+	private Liste<Employe> supprimerEmploye(final Ligue ligue)
+	{
+		return new Liste<>("Supprimer un employé", "s", 
+				new ActionListe<Employe>()
+		{
+			@Override
+			public List<Employe> getListe()
+			{
+				return new ArrayList<>(ligue.getEmployes());
+			}
+			@Override
+			public void elementSelectionne(int indice, Employe element)
+			{
+				element.remove();
+			}
+		});
+	}
+	
+	private Liste<Employe> changerAdministrateur(final Ligue ligue)
+	{
+		return new Liste<Employe>("Changer d'administrateur", "c", 
+				new ActionListe<Employe>()
+				{
+					@Override
+					public List<Employe> getListe()
 					{
-						supprimerCompte(employe) ; break;
+						return new ArrayList<>(ligue.getEmployes());
 					}
-				default : System.out.println("Erreur de saisie");
+					@Override
+					public void elementSelectionne(int indice, Employe element)
+					{
+						ligue.setAdministrateur(element);
+					}
+				});
+	}		
+	
+	private Option changerNom(final Ligue ligue)
+	{
+		Option option = new Option("Renommer", "r");
+		option.setAction(new Action()
+		{
+			@Override
+			public void optionSelectionnee()
+			{
+				ligue.setNom(getString("Nouveau nom : "));
 			}
-		}
-		while(saisie != QUITTER && saisie != SUPPRIMER);		
+		});
+		return option;
+	}
+
+	private Liste<Ligue> selectionnerLigue()
+	{
+		Liste<Ligue> liste = new Liste<Ligue>("Sélectionner une ligue", "e", 
+				new ActionListe<Ligue>()
+				{
+					@Override
+					public List<Ligue> getListe()
+					{
+						return new ArrayList<>(gestionPersonnel.getLigues());
+					}
+					@Override
+					public void elementSelectionne(int indice, Ligue element)
+					{
+						editerLigue(element).start();
+					}
+				});
+		return liste;
 	}
 	
-	private void menuPrincipal()
+	private Liste<Ligue> supprimerLigue()
 	{
-		char saisie;
-		do
+		Liste<Ligue> liste = new Liste<Ligue>("Supprimer une ligue", "d", 
+				new ActionListe<Ligue>()
+				{
+					@Override
+					public List<Ligue> getListe()
+					{
+						return new ArrayList<>(gestionPersonnel.getLigues());
+					}
+					@Override
+					public void elementSelectionne(int indice, Ligue element)
+					{
+						element.remove();
+					}
+				});
+		return liste;
+	}
+	
+	private Option changerNom(final Employe employe)
+	{
+		Option option = new Option("Changer le nom", "n");
+		option.setAction(new Action()
 		{
-			saisie = Util.saisieChar(MENU_PRINCIPAL);
-			switch(saisie)
+			@Override
+			public void optionSelectionnee()
 			{
-				case QUITTER : System.out.println("Au revoir !"); break;
-				case GERE_COMPTE_ROOT : menuCompte(gestionPersonnel.getRoot()) ; break;
-				case GERE_LIGUES : menuLigues() ; break;
-				default : System.out.println("Erreur de saisie");
+				employe.setNom(getString("Nouveau nom : "));				
 			}
-		}
-		while(saisie != QUITTER);
-		try
+		});
+		return option;
+	}
+	
+	private Option changerPrenom(final Employe employe)
+	{
+		Option option = new Option("Changer le prénom", "p");
+		option.setAction(new Action()
 		{
-			gestionPersonnel.sauvegarder();
-		}
-		catch (SauvegardeImpossible e) 
+			@Override
+			public void optionSelectionnee()
+			{
+				employe.setPrenom(getString("Nouveau prénom : "));				
+			}
+		});
+		return option;
+	}
+	
+	private Option changerMail(final Employe employe)
+	{
+		Option option = new Option("Changer le mail", "e");
+		option.setAction(new Action()
 		{
-			System.out.println("Une erreur s'est produite, le fichier n'a"
-					+ "pas été sauvegardé.");
-		}
+			@Override
+			public void optionSelectionnee()
+			{
+				employe.setMail(getString("Nouveau mail : "));				
+			}
+		});
+		return option;
+	}
+	
+	private Option changerPassword(final Employe employe)
+	{
+		Option option = new Option("Changer le password", "x");
+		option.setAction(new Action()
+		{
+			@Override
+			public void optionSelectionnee()
+			{
+				employe.setPassword(getString("Nouveau password : "));				
+			}
+		});
+		return option;
+	}
+	
+	private Option quitterEtEnregistrer()
+	{
+		return new Option("Quitter et enregistrer", "q", new Action()
+		{
+			@Override
+			public void optionSelectionnee()
+			{
+				try
+				{
+					gestionPersonnel.sauvegarder();
+					Action.QUITTER.optionSelectionnee();
+				} 
+				catch (SauvegardeImpossible e)
+				{
+					System.out.println("Impossible d'effectuer la sauvegarde");
+				}
+			}
+		});
+	}
+	
+	private Option quitterSansEnregistrer()
+	{
+		return new Option("Quitter sans enregistrer", "a", Action.QUITTER);
 	}
 	
 	private boolean verifiePassword()
 	{
-		boolean ok = gestionPersonnel.getRoot().checkPassword(Util.saisieString("password : "));
+		boolean ok = gestionPersonnel.getRoot().checkPassword(getString("password : "));
 		if (!ok)
 			System.out.println("Password incorrect.");
 		return ok;
@@ -273,6 +371,7 @@ public class PersonnelConsole
 		PersonnelConsole personnelConsole = 
 				new PersonnelConsole(GestionPersonnel.getGestionPersonnel());
 		if (personnelConsole.verifiePassword())
-			personnelConsole.menuPrincipal();
+			personnelConsole.start();
+		
 	}
 }
