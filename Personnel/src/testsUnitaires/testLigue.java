@@ -12,21 +12,37 @@ class testLigue
 	void createLigue() 
 	{
 		Ligue ligue = new Ligue("Fléchettes");
-		assertEquals("Fléchettes", ligue.getNom());
+		assertEquals("FlÃ©chettes", ligue.getNom());
 	}
 
 	@Test
 	void addEmploye() 
 	{
 		Ligue ligue = new Ligue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty"); 
+		Employe employe = ligue.addEmploye("Bouchard", "GÃ©rard", "g.bouchard@gmail.com", "azerty"); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
+	     @Test
+        void testSetNom()
+        {
+                Ligue ligue = new Ligue("champion");
+                String nom = "selima";
+                Employe employe = ligue.addEmploye(nom, "selima", "sbk@gmail.com", "sbk");
+                assertTrue(employe.getNom().contains(nom));
+        }
+        @Test
+        void  testGetAdministrateur()
+        {
+                Ligue ligue = new Ligue("Fléchettes");
+                Employe employe = GestionPersonnel.getGestionPersonnel().getRoot();
+                ligue.setAdministrateur(employe);
+                assertEquals(employe, ligue.getAdministrateur());
+        }
 	 @Test
      void testRemove()
      {
-             Ligue ligue = new Ligue("Fl�chettes");
-             Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty");
+             Ligue ligue = new Ligue("Fléchettes");
+             Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
              employe.remove();
              assertFalse(ligue.getEmployes().contains(employe));
      }
