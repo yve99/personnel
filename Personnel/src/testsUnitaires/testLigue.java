@@ -46,4 +46,12 @@ class testLigue
              employe.remove();
              assertFalse(ligue.getEmployes().contains(employe));
      }
+	 @Test
+     void testCompareTo()
+     {
+             Ligue ligue = new Ligue("Fléchettes");
+             Ligue ligue2 = new Ligue("champion");
+             ligue.getNom().compareTo(ligue2.getNom());
+             assertNotEquals(ligue.getNom(), ligue2.getNom());
+     }
 }
