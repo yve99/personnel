@@ -47,7 +47,5 @@ class testLigue
                 assertFalse(ligue.getEmployes().contains(employe));
         }
 
-  
-
 }
 
