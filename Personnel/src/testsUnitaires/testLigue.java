@@ -57,6 +57,13 @@ class testLigue
              ligue.getNom().compareTo(ligue2.getNom());
              assertNotEquals(ligue.getNom(), ligue2.getNom());
      }
+	 @Test 
+	 void testGetEmployes() {
+		 
+		 Ligue ligue = new Ligue ("champion");
+		 Employe employe = ligue.addEmploye("selim", "delim", "sbd@gmail.com", "selim");
+		 assertTrue(ligue.getEmployes().contains(employe));
+	 }
 
 }
 
