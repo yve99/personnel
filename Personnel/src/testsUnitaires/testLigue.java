@@ -22,14 +22,17 @@ class testLigue
                 Ligue ligue = new Ligue("Fléchettess");
                 Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty");
                 assertEquals(employe, ligue.getEmployes().first());
+                assertEquals(ligue, employe.getLigue());
         }
         @Test
         void testSetNom()
         {
-                Ligue ligue = new Ligue("champion");
-                String nom = "selima";
-                Employe employe = ligue.addEmploye(nom, "selima", "sbk@gmail.com", "sbk");
-                assertTrue(employe.getNom().contains(nom));
+        	Ligue ligue = new Ligue("champion");
+            String nom = "fléchettes" ;
+          //  Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty");
+            ligue.setNom(nom);
+            assertEquals(nom, ligue.getNom());
+            // System.out.println(ligue.getNom());
         }
         @Test
         void  testGetAdministrateur()
@@ -46,6 +49,7 @@ class testLigue
                 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
                 employe.remove();
                 assertFalse(ligue.getEmployes().contains(employe));
+              //  assertFalse(employe.getLigue().contains(ligue));
         }
 
 	
@@ -54,7 +58,7 @@ class testLigue
      {
              Ligue ligue = new Ligue("Fléchettes");
              Ligue ligue2 = new Ligue("champion");
-             ligue.getNom().compareTo(ligue2.getNom());
+             ligue.compareTo(ligue2);
              assertNotEquals(ligue.getNom(), ligue2.getNom());
      }
 	 @Test 
@@ -63,7 +67,38 @@ class testLigue
 		 Ligue ligue = new Ligue ("champion");
 		 Employe employe = ligue.addEmploye("selim", "delim", "sbd@gmail.com", "selim");
 		 assertTrue(ligue.getEmployes().contains(employe));
+		 ligue.getEmployes().size();
+		// System.out.println(ligue.getEmployes().size());
 	 }
-
+	 @Test
+	 void testToString() {
+		 Ligue ligue = new Ligue("champion");
+		 String nom = "champion";
+		 ligue.setNom(nom);
+		 assertEquals(ligue.toString(), ligue.getNom());
+		// System.out.println(ligue.getNom());
+		  
+	 }
+     @Test
+	 void testgetNom() {
+		 
+		 Ligue ligue = new Ligue("champion");
+		 String nom = "champion";
+		 Employe employe = ligue.addEmploye("denim" ,"selima","sbk@gmail.com", "sbk");
+		 ligue.setNom(nom);
+         assertEquals(nom, ligue.getNom());
+	  // System.out.println(ligue.getNom());	 
+		 
+	 }
+    // @Test
+    //void setAdministarateur(){
+    	// Ligue ligue = new Ligue("Fléchettes");
+    	 //String administrateur = "administrateur";
+    	 //Employe employe = GestionPersonnel.getGestionPersonnel().getRoot();
+    	 //ligue.setAdministrateur(administrateur);
+    	 //assertEquals(administrateur, ligue.getAdministrateur());
+    	//System.out.println(ligue.getAdministrateur()); 	 
+     //}
+	 
 }
 
