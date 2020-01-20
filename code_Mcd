@@ -1,5 +1,4 @@
-EMPLOYE : id_employé,nom,prenom,mail,password,level
-APPARTENIR , 01 EMPLOYE, 01 LIGUE, 11 DATE : date_depart
+EMPLOYE : id_employé,nom,prenom,mail,password,level,date_depart,date_arrivée
+APPARTENIR , 01 EMPLOYE, 01 LIGUE
 LIGUE :id_ligue, nom_ligue
 
-DATE: date_arrivée
