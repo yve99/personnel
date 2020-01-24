@@ -2,6 +2,8 @@ package testsUnitaires;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
@@ -155,5 +157,18 @@ import personnel.*;
 		// System.out.println(ligue.getNom());
 		  
 	 } 
-	 
+	 @Test
+	 void testSetArrival() {
+		 Ligue ligue = new Ligue("champion");
+		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+		 LocalDate arrival = LocalDate.now();
+		 employe.setArrival(arrival);
+		 assertEquals(arrival, employe.getArrival());
+		// System.out.println(arrival); 
+	}
+	// @Test
+	// void testGetArrival() { 
+	//	 Ligue ligue = new Ligue("champion");
+		// Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty"); 
+	// }
 }
