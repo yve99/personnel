@@ -2,7 +2,6 @@ package personnel;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 
 /**
@@ -21,14 +20,14 @@ public class Employe implements Serializable, Comparable<Employe>
 	private LocalDate arrival;
 	private LocalDate depart;
 	
-	Employe(Ligue ligue, String nom, String prenom, String mail, String password)
+	Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate arrival)
 	{
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
 		this.mail = mail;
 		this.ligue = ligue;
-		//this.arrival = arrival;
+		this.arrival = arrival;
 		//this.depart = depart;
 	}
 	
@@ -186,19 +185,29 @@ public class Employe implements Serializable, Comparable<Employe>
 			res += ligue.toString();
 		return res + ")";
 	}
-
+/**
+ * Retourne la date d'arrivée de l'employé.
+ * @return la date d'arrivée de l'employé */
+	
 	public LocalDate getArrival() {
 		return arrival;
 	}
 
+/**
+* change la date d'arrivée de l'employé.
+* @param la date d'arrivée de l'employé */
 	public void setArrival(LocalDate arrival) {
 		this.arrival = arrival;
 	}
-
+	/**
+	 * Retourne la date de départ de l'employé.
+	 * @return la date de départ de l'employé */
 	public LocalDate getDepart() {
 		return depart;
 	}
-
+	/**
+	* change la date de départ de l'employé.
+	* @param la date de départ de l'employé */
 	public void setDepart(LocalDate depart) {
 		this.depart = depart;
 	}

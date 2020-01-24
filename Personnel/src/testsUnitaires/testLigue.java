@@ -20,7 +20,7 @@ class testLigue
         void testAddEmploye()
         {
                 Ligue ligue = new Ligue("Fléchettess");
-                Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty");
+                Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty", null);
                 assertEquals(employe, ligue.getEmployes().first());
                 assertEquals(ligue, employe.getLigue());
         }
@@ -46,7 +46,7 @@ class testLigue
         void testRemove()
         {
                 Ligue ligue = new Ligue("Fléchettes");
-                Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+                Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null);
                 employe.remove();
                 assertFalse(ligue.getEmployes().contains(employe));
               //  assertFalse(employe.getLigue().contains(ligue));
@@ -65,7 +65,7 @@ class testLigue
 	 void testGetEmployes() {
 		 
 		 Ligue ligue = new Ligue ("champion");
-		 Employe employe = ligue.addEmploye("selim", "delim", "sbd@gmail.com", "selim");
+		 Employe employe = ligue.addEmploye("selim", "delim", "sbd@gmail.com", "selim", null);
 		 assertTrue(ligue.getEmployes().contains(employe));
 		 ligue.getEmployes().size();
 		// System.out.println(ligue.getEmployes().size());
@@ -84,7 +84,7 @@ class testLigue
 		 
 		 Ligue ligue = new Ligue("champion");
 		 String nom = "champion";
-		 Employe employe = ligue.addEmploye("denim" ,"selima","sbk@gmail.com", "sbk");
+		 Employe employe = ligue.addEmploye("denim" ,"selima","sbk@gmail.com", "sbk", null);
 		 ligue.setNom(nom);
          assertEquals(nom, ligue.getNom());
 	  // System.out.println(ligue.getNom());	 
