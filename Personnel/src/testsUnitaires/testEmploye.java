@@ -2,6 +2,8 @@ package testsUnitaires;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
@@ -14,7 +16,7 @@ import personnel.*;
      {
              Ligue ligue = new Ligue("champion");
              String mail = "sbk@gmail.com";
-             Employe employe = ligue.addEmploye("dénim" ,"selima", mail , "sbk");
+             Employe employe = ligue.addEmploye("dï¿½nim" ,"selima", mail , "sbk");
              employe.setMail(mail);
              assertEquals(mail, employe.getMail());
      }
@@ -25,7 +27,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue("champion");
 		 String password = "qwerty";
-		 Employe employe = ligue.addEmploye("dénim", "selima", "sbk@gmail.com", password);
+		 Employe employe = ligue.addEmploye("dï¿½nim", "selima", "sbk@gmail.com", password);
 		 employe.setPassword(password);
 		 assertTrue(employe.checkPassword(password));
 	 }
@@ -34,13 +36,15 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue ("champion");
 		 String prenom = "selima";
-		 Employe employe = ligue.addEmploye("dénim", prenom, "sbk@gmail.com", "qwerty");
+		 Employe employe = ligue.addEmploye("dï¿½nim", prenom, "sbk@gmail.com", "qwerty");
 		 employe.setPrenom(prenom);
 		 assertEquals(prenom, employe.getPrenom());
+	 } 
+		 
+ }	 
 		 
 		 
-		 
-		 
-		 
-	 }
-}
+	 
+
+
+

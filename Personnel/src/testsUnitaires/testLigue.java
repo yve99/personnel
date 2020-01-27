@@ -5,7 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
+import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import personnel.Employe;
+import personnel.GestionPersonnel;
+import personnel.Ligue;
 class testLigue
 {
 
@@ -20,7 +31,7 @@ class testLigue
         void testAddEmploye()
         {
                 Ligue ligue = new Ligue("Fléchettess");
-                Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty");
+                Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
                 assertEquals(employe, ligue.getEmployes().first());
         }
         @Test
@@ -65,5 +76,7 @@ class testLigue
 		 assertTrue(ligue.getEmployes().contains(employe));
 	 }
 
+
 }
+
 
