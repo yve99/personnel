@@ -28,11 +28,10 @@ class testLigue
         void testSetNom()
         {
         	Ligue ligue = new Ligue("champion");
-            String nom = "fléchettes" ;
-          //  Employe employe = ligue.addEmploye("Bouchard", "G�rard", "g.bouchard@gmail.com", "azerty");
-            ligue.setNom(nom);
-            assertEquals(nom, ligue.getNom());
-            // System.out.println(ligue.getNom());
+            String ligue1 = "fléchettes" ;
+            ligue.setNom(ligue1);
+            assertEquals(ligue1, ligue.getNom());
+             System.out.println(ligue.getNom());
         }
         @Test
         void  testGetAdministrateur()
@@ -49,6 +48,7 @@ class testLigue
                 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null);
                 employe.remove();
                 assertFalse(ligue.getEmployes().contains(employe));
+                assertNull(employe.getLigue());
               //  assertFalse(employe.getLigue().contains(ligue));
         }
 
@@ -59,7 +59,9 @@ class testLigue
              Ligue ligue = new Ligue("Fléchettes");
              Ligue ligue2 = new Ligue("champion");
              ligue.compareTo(ligue2);
-             assertNotEquals(ligue.getNom(), ligue2.getNom());
+             assertNotEquals(ligue.getNom() , ligue2.getNom());
+             assertTrue(ligue.compareTo(ligue2) > 0);
+             assertTrue(ligue.compareTo(ligue2)< 0);
      }
 	 @Test 
 	 void testGetEmployes() {
@@ -90,15 +92,14 @@ class testLigue
 	  // System.out.println(ligue.getNom());	 
 		 
 	 }
-    // @Test
-    //void setAdministarateur(){
-    	// Ligue ligue = new Ligue("Fléchettes");
-    	 //String administrateur = "administrateur";
-    	 //Employe employe = GestionPersonnel.getGestionPersonnel().getRoot();
-    	 //ligue.setAdministrateur(administrateur);
-    	 //assertEquals(administrateur, ligue.getAdministrateur());
-    	//System.out.println(ligue.getAdministrateur()); 	 
-     //}
+     @Test
+    void setAdministarateur(){
+    	 Ligue ligue = new Ligue("Fléchettes");
+    	 Employe employe = ligue.addEmploye("denim" ,"selima","sbk@gmail.com", "sbk", null);
+    	 ligue.setAdministrateur(employe);
+    	 assertEquals(employe, ligue.getAdministrateur());
+    	System.out.println(ligue.getAdministrateur()); 	 
+     }
 	 
 }
 
