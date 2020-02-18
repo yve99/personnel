@@ -2,6 +2,7 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.time.LocalDate;
 
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
@@ -24,8 +25,25 @@ public class EmployeConsole
 		menu.add(changerPrenom(employe));
 		menu.add(changerMail(employe));
 		menu.add(changerPassword(employe));
+		menu.add(changerDateArrival(employe));
+		menu.add(changerDateDepart(employe));
 		menu.addBack("q");
 		return menu;
+	}
+
+	private Option changerDateDepart( final Employe employe) {
+		// TODO Auto-generated method stub
+		return new Option ("changer la date d'arrivée: " , "z", () -> {employe.setArrival(getDate());});
+	}
+
+	private LocalDate getDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Option changerDateArrival(final Employe employe) {
+		// TODO Auto-generated method stub
+		return new Option ("changer la date de départ: ", "y",() ->  {employe.setDepart(getDate());});
 	}
 
 	private Option changerNom(final Employe employe)

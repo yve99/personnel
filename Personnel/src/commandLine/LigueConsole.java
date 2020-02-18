@@ -107,8 +107,7 @@ public class LigueConsole
 	
 
 	private Menu selectionnerEmploye(Ligue ligue) {
-		Menu menu = new Menu("selectionner" + ligue.getEmployes(), "s");
-		menu.add(afficherEmployes(ligue));
+		Menu menu = new Menu("selectionner un employe" + ligue.getEmployes(), "s");
 		menu.add(modifierEmploye(ligue));
 		menu.add(supprimerEmploye(ligue));
 		menu.addBack("q");
@@ -124,10 +123,10 @@ public class LigueConsole
 				);
 	}
 	
-	private List<Employe> changerAdministrateur(final Ligue ligue)
-	{
-		return null;
-	}		
+	//private List<Employe> changerAdministrateur(final Ligue ligue)
+	//{
+		//return null;
+//	}		
 
 	private List<Employe> modifierEmploye(final Ligue ligue)
 	{
