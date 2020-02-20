@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import commandLineMenus.List;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
+import java.time.LocalDate;
 
 import personnel.*;
 
@@ -140,5 +141,14 @@ public class LigueConsole
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
 	}
+	private static LocalDate getDate() {
+		int year = 0 ;
+		int month = 0;
+		int dayOfMonth = 0;
+		LocalDate date = LocalDate.of(year, month, dayOfMonth);
+		return date;
+			
+	}
+
 	
 }

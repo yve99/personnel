@@ -32,18 +32,22 @@ public class EmployeConsole
 	}
 
 	private Option changerDateDepart( final Employe employe) {
-		// TODO Auto-generated method stub
-		return new Option ("changer la date d'arrivée: " , "z", () -> {employe.setArrival(getDate());});
+		
+		return new Option ("changer la date d'arrivée " , "z", () -> {employe.setArrival(getDate());});
 	}
 
 	private LocalDate getDate() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int dayOfMonth = 0 ;
+		int month = 0;
+		int year = 0;
+		LocalDate date = LocalDate.of(year, month, dayOfMonth);
+		return date;
 	}
 
 	private Option changerDateArrival(final Employe employe) {
-		// TODO Auto-generated method stub
-		return new Option ("changer la date de départ: ", "y",() ->  {employe.setDepart(getDate());});
+		
+		return new Option ("changer la date de départ ", "y",() ->  {employe.setDepart(getDate());});
 	}
 
 	private Option changerNom(final Employe employe)
