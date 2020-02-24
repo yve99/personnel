@@ -8,7 +8,6 @@ import commandLineMenus.List;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import java.time.LocalDate;
-
 import personnel.*;
 
 public class LigueConsole 
@@ -82,7 +81,13 @@ public class LigueConsole
 				(element) -> editerLigue(element)
 				);
 	}
-		
+	private List<Employe> selectionnerEmploye( Ligue ligue )
+	{
+		return new List<Employe>("Sélectionner un employe", "e", 
+				() -> new ArrayList<>(ligue.getEmployes()),
+				(element) -> employeConsole.selectionnerEmploye(element)
+				);
+	}	
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
@@ -106,15 +111,6 @@ public class LigueConsole
 		return menu;
 	}
 	
-
-	private Menu selectionnerEmploye(Ligue ligue) {
-		Menu menu = new Menu("selectionner un employe" + ligue.getEmployes(), "s");
-		menu.add(modifierEmploye(ligue));
-		menu.add(supprimerEmploye(ligue));
-		menu.addBack("q");
-		
-		return menu;
-	}
 
 	private List<Employe> supprimerEmploye(final Ligue ligue)
 	{
@@ -141,14 +137,15 @@ public class LigueConsole
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
 	}
-	private static LocalDate getDate() {
-		int year = 0 ;
-		int month = 0;
-		int dayOfMonth = 0;
-		LocalDate date = LocalDate.of(year, month, dayOfMonth);
-		return date;
-			
-	}
+//	private static LocalDate getDate() {
+//		int year, month, dayOfMonth;
+//		 year = 0;
+//		 month = 0;   
+//		 dayOfMonth = 0;
+//		LocalDate date = LocalDate.of(year, month, dayOfMonth);
+//		return date;
+//			
+//	}
 
 	
 }
