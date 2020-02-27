@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import commandLineMenus.List;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
-
+import java.time.LocalDate;
 import personnel.*;
 
 public class LigueConsole 
@@ -81,6 +81,13 @@ public class LigueConsole
 				(element) -> editerLigue(element)
 				);
 	}
+	private List<Employe> selectionnerEmploye( Ligue ligue )
+	{
+		return new List<Employe>("Sélectionner un employe", "e", 
+				() -> new ArrayList<>(ligue.getEmployes()),
+				(element) -> employeConsole.selectionnerEmploye(element)
+				);
+	}	
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
@@ -99,11 +106,11 @@ public class LigueConsole
 		Menu menu = new Menu("Gérer les employés de " + ligue.getNom(), "e");
 		menu.add(afficherEmployes(ligue));
 		menu.add(ajouterEmploye(ligue));
-		menu.add(modifierEmploye(ligue));
-		menu.add(supprimerEmploye(ligue));
+		menu.add(selectionnerEmploye(ligue));
 		menu.addBack("q");
 		return menu;
 	}
+	
 
 	private List<Employe> supprimerEmploye(final Ligue ligue)
 	{
@@ -113,10 +120,10 @@ public class LigueConsole
 				);
 	}
 	
-	private List<Employe> changerAdministrateur(final Ligue ligue)
-	{
-		return null;
-	}		
+	//private List<Employe> changerAdministrateur(final Ligue ligue)
+	//{
+		//return null;
+//	}		
 
 	private List<Employe> modifierEmploye(final Ligue ligue)
 	{
@@ -130,5 +137,15 @@ public class LigueConsole
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
 	}
+//	private static LocalDate getDate() {
+//		int year, month, dayOfMonth;
+//		 year = 0;
+//		 month = 0;   
+//		 dayOfMonth = 0;
+//		LocalDate date = LocalDate.of(year, month, dayOfMonth);
+//		return date;
+//			
+//	}
+
 	
 }

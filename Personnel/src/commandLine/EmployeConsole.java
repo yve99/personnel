@@ -2,11 +2,15 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 
+import commandLineMenus.List;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
 import personnel.GestionPersonnel;
+import personnel.Ligue;
 
 
 public class EmployeConsole 
@@ -24,9 +28,30 @@ public class EmployeConsole
 		menu.add(changerPrenom(employe));
 		menu.add(changerMail(employe));
 		menu.add(changerPassword(employe));
+//		menu.add(changerDateArrival(employe));
+//		menu.add(changerDateDepart(employe));
 		menu.addBack("q");
 		return menu;
 	}
+
+//	private Option changerDateDepart( final Employe employe) {
+//		
+//		return new Option ("changer la date d'arrivée " , "z", () -> {employe.setArrival(getDate());});
+//	}
+//
+//	private LocalDate getDate() {
+//		
+//		int dayOfMonth = 0 ;
+//		int month = 0;
+//		int year = 0;
+//		LocalDate date = LocalDate.of(year, month, dayOfMonth);
+//		return date;               
+//	}
+//
+//	private Option changerDateArrival(final Employe employe) {
+//		
+//		return new Option ("changer la date de départ ", "y",() ->  {employe.setDepart(getDate());});
+//	}
 
 	private Option changerNom(final Employe employe)
 	{
@@ -50,5 +75,14 @@ public class EmployeConsole
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
 	}
 	
+	 Menu selectionnerEmploye(Employe employe) {
+		Menu menu = new Menu("selectionner " + employe.getNom(), "s");
+		menu.add(afficher(employe));
+		menu.add(editerEmploye(employe));
+//		menu.add(supprimerEmploye(employe));
+		menu.addBack("q");
+		
+		return menu;
+	}
 
 }
