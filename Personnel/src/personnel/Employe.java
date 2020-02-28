@@ -27,22 +27,18 @@ import java.time.LocalDate;
 public class Employe implements Serializable, Comparable<Employe>
 
 {
-
              private static final long serialVersionUID = 4795721718037994734L;
 
              private String nom, prenom, password, mail;
 
-             private LocalDate DateDebut, DateFin;
+             private LocalDate arrival;
+             private LocalDate depart;
 
              private Ligue ligue;
 
-            
+ public Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate arrival) { 
 
-             public Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate DateDebut)
-
-             { 
-
-                           this.nom = nom;
+               this.nom = nom;
 
                            this.prenom = prenom;
 
@@ -52,12 +48,9 @@ public class Employe implements Serializable, Comparable<Employe>
 
                            this.ligue = ligue;
 
-                           this.DateDebut = DateDebut;
+                           this.arrival= arrival;
 
              }
-
-            
-
              /**
 
              * Retourne vrai ssi l'employé est administrateur de la ligue
@@ -74,18 +67,12 @@ public class Employe implements Serializable, Comparable<Employe>
 
              */
 
-            
-
              public boolean estAdmin(Ligue ligue)
-
              {
 
                            return ligue.getAdministrateur() == this;
 
              }
-
-            
-
              /**
 
              * Retourne vrai ssi l'employé est le root.
@@ -270,8 +257,6 @@ public class Employe implements Serializable, Comparable<Employe>
 
              }
 
- 
-
              /**
 
              * Retourne la ligue à laquelle l'employé est affecté.
@@ -279,9 +264,6 @@ public class Employe implements Serializable, Comparable<Employe>
              * @return la ligue à laquelle l'employé est affecté.
 
              */
-
-            
-
              public Ligue getLigue()
 
              {
@@ -290,8 +272,6 @@ public class Employe implements Serializable, Comparable<Employe>
 
              }
 
- 
-
              /**
 
              * Supprime l'employé. Si celui-ci est un administrateur, le root
@@ -299,9 +279,6 @@ public class Employe implements Serializable, Comparable<Employe>
              * récupère les droits d'administration sur sa ligue.
 
              */
-
-            
-
              public void remove()
 
              {
@@ -325,9 +302,6 @@ public class Employe implements Serializable, Comparable<Employe>
                                         throw new ImpossibleDeSupprimerRoot();
 
              }
-
- 
-
              @Override
 
              public int compareTo(Employe autre)
@@ -343,16 +317,12 @@ public class Employe implements Serializable, Comparable<Employe>
                            return getPrenom().compareTo(autre.getPrenom());
 
              }
-
-            
-
              @Override
 
              public String toString()
 
              {
-
-                           String res = nom + " " + prenom + " " + mail + " " + DateDebut + " (";
+                           String res = nom + " " + prenom + " " + mail + " " + arrival + " (";
 
                            if (estRoot())
 
@@ -363,39 +333,36 @@ public class Employe implements Serializable, Comparable<Employe>
                                         res += ligue.toString();
 
                            return res + ")";
-
              }
 
- 
+/**
+* retourne la date d'arrivée de l'employé
+* @return la date de depart de l'employé*/
 
-             public LocalDate getDateDebut() {
+             public LocalDate getArrival() {
 
-                           return DateDebut;
-
+                           return arrival;
              }
+/**
+* change la date d'arrivée de l'employé
+* @param la date d'arrivée de l'employé*/
+             public void setArrival(LocalDate Arrival) {
 
- 
-
-             public void setDateDebut(LocalDate DateDebut) {
-
-                           this.DateDebut = DateDebut;
-
+                           this.arrival = arrival;
              }
+/**
+* retourne la date de depart de l'employé
+* @return la date de depart de l'employé*/
+             public LocalDate getDepart() {
 
-            
-
-             public LocalDate getDateFin() {
-
-                           return DateFin;
-
+                           return depart;
              }
+/**
+ * change la date de depart de l'employé
+ * @param la date de depart de l'employé*/
+             public void setDepart(LocalDate depart) {
 
- 
-
-             public void setDateFin(LocalDate DateFin) {
-
-                           this.DateFin = DateFin;
-
+                           this.depart = depart;
              }
 
 }

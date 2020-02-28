@@ -1,5 +1,6 @@
 package commandLine;
 
+import static commandLineMenus.rendering.examples.util.InOut.getInt;
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
 import java.util.ArrayList;
@@ -81,22 +82,14 @@ public class LigueConsole
 				(element) -> editerLigue(element)
 				);
 	}
-//	private List<Employe> selectionnerEmploye( Ligue ligue )
-//	{
-//		return new List<Employe>("Sélectionner un employe", "e", 
-//				() -> new ArrayList<>(ligue.getEmployes()),
-//				(element) -> EmployeConsole(element)
-//				);
-//	}	
-	 private Menu selectionnerEmploye(Ligue ligue) {
-			Menu menu = new Menu("selectionner " + ligue.getNom(), "s");
-			menu.add(afficherEmployes(ligue));
-			menu.add(modifierEmploye(ligue));
-			menu.add(supprimerEmploye(ligue));
-			menu.addBack("q");
-			
-			return menu;
-		}
+
+	 private List<Employe> selectEmploye( Ligue ligue)
+		{
+			return new List<Employe>("Sélectionner un employe", "e", 
+					() -> new ArrayList<>(ligue.getEmployes()),
+					(element) ->employeConsole.selectEmployer(element)
+					);
+		}	
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
@@ -105,7 +98,7 @@ public class LigueConsole
 				{
 					ligue.addEmploye(getString("nom : "), 
 						getString("prenom : "), getString("mail : "), 
-						getString("password : "), null);
+						getString("password : "), getDate());
 				}
 		);
 	}
@@ -115,7 +108,8 @@ public class LigueConsole
 		Menu menu = new Menu("Gérer les employés de " + ligue.getNom(), "e");
 		menu.add(afficherEmployes(ligue));
 		menu.add(ajouterEmploye(ligue));
-		menu.add(selectionnerEmploye(ligue));
+		menu.add(selectEmploye(ligue));
+		menu.add(supprimerEmploye(ligue));
 		menu.addBack("q");
 		return menu;
 	}
@@ -146,15 +140,16 @@ public class LigueConsole
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
 	}
-//	private static LocalDate getDate() {
-//		int year, month, dayOfMonth;
-//		 year = 0;
-//		 month = 0;   
-//		 dayOfMonth = 0;
-//		LocalDate date = LocalDate.of(year, month, dayOfMonth);
-//		return date;
-//			
-//	}
 
+	 private LocalDate getDate() {/// rapeler la fonction getDate
+
+         int year = getInt("année  : ");
+         int month = getInt("mois : ");
+         int dayOfMonth = getInt(" jour :");
+
+         LocalDate date = LocalDate.of(year, month, dayOfMonth);
+
+         return date;
+}
 	
 }
