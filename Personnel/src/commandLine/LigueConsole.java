@@ -81,13 +81,22 @@ public class LigueConsole
 				(element) -> editerLigue(element)
 				);
 	}
-	private List<Employe> selectionnerEmploye( Ligue ligue )
-	{
-		return new List<Employe>("Sélectionner un employe", "e", 
-				() -> new ArrayList<>(ligue.getEmployes()),
-				(element) -> employeConsole.selectionnerEmploye(element)
-				);
-	}	
+//	private List<Employe> selectionnerEmploye( Ligue ligue )
+//	{
+//		return new List<Employe>("Sélectionner un employe", "e", 
+//				() -> new ArrayList<>(ligue.getEmployes()),
+//				(element) -> selectionnerEmploye(element)
+//				);
+//	}	
+	 private Menu selectionnerEmploye(Ligue ligue) {
+			Menu menu = new Menu("selectionner " + ligue.getNom(), "s");
+			menu.add(afficherEmployes(ligue));
+			menu.add(modifierEmploye(ligue));
+			menu.add(supprimerEmploye(ligue));
+			menu.addBack("q");
+			
+			return menu;
+		}
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{

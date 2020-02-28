@@ -75,14 +75,6 @@ public class EmployeConsole
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
 	}
 	
-	 Menu selectionnerEmploye(Employe employe) {
-		Menu menu = new Menu("selectionner " + employe.getNom(), "s");
-		menu.add(afficher(employe));
-		menu.add(editerEmploye(employe));
-//		menu.add(supprimerEmploye(employe));
-		menu.addBack("q");
-		
-		return menu;
-	}
+	
 
 }
