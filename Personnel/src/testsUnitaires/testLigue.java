@@ -5,7 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
+import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import java.time.LocalDate;
+import personnel.Employe;
+import personnel.GestionPersonnel;
+import personnel.Ligue;
 class testLigue
 {
 
@@ -82,8 +89,7 @@ class testLigue
 		  
 	 }
      @Test
-	 void testgetNom() {
-		 
+	 void testgetNom() {	 
 		 Ligue ligue = new Ligue("champion");
 		 String nom = "champion";
 		 Employe employe = ligue.addEmploye("denim" ,"selima","sbk@gmail.com", "sbk", null);
@@ -102,4 +108,5 @@ class testLigue
      }
 	 
 }
+
 

@@ -85,7 +85,7 @@ public class LigueConsole
 //	{
 //		return new List<Employe>("Sélectionner un employe", "e", 
 //				() -> new ArrayList<>(ligue.getEmployes()),
-//				(element) -> selectionnerEmploye(element)
+//				(element) -> EmployeConsole(element)
 //				);
 //	}	
 	 private Menu selectionnerEmploye(Ligue ligue) {

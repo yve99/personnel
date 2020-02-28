@@ -1,20 +1,30 @@
 package commandLine;
 
+ 
+
+import static commandLineMenus.rendering.examples.util.InOut.getInt;
+
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+ 
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-import commandLineMenus.List;
+ 
+
 import commandLineMenus.Menu;
+
 import commandLineMenus.Option;
+
 import personnel.Employe;
+
 import personnel.GestionPersonnel;
-import personnel.Ligue;
 
+ 
+public class EmployeConsole
 
-public class EmployeConsole 
 {
+
 	private Option afficher(final Employe employe)
 	{
 		return new Option("Afficher l'employé", "l", () -> {System.out.println(employe);});
@@ -75,6 +85,4 @@ public class EmployeConsole
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
 	}
 	
-	
-
 }

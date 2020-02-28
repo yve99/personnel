@@ -45,7 +45,7 @@ import personnel.*;
 	 @Test
 	 void testsetPrenom() {
 		 
-		 Ligue ligue = new Ligue ("champion");
+		 Ligue ligue = new Ligue ("champion"); 
 		 String prenom = "lebron";
 		 Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com", "qwerty", null);
 		 employe.setPrenom(prenom);
@@ -202,3 +202,4 @@ import personnel.*;
 		 
 	}
 }
+
