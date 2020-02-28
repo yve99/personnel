@@ -7,6 +7,7 @@ import static commandLineMenus.rendering.examples.util.InOut.getString;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 
 import commandLineMenus.List;
 import commandLineMenus.Menu;
@@ -37,6 +38,7 @@ public class EmployeConsole
 		menu.add(changerPassword(employe));
 		menu.add(changerDateArrival(employe));
 		menu.add(changerDateDepart(employe));
+		menu.add(supprimerEmploye(employe));
 		menu.addBack("q");
 		return menu;
 	}
@@ -84,6 +86,12 @@ public class EmployeConsole
 	private Option changerPassword(final Employe employe)
 	{
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
+	}
+	private Option supprimerEmploye(Employe employe)
+	{
+		return new Option("Supprimer un employe ", "s", () ->
+	 {employe.remove();}
+				);
 	}
 	
 	Menu selectEmployer(Employe employe) {
