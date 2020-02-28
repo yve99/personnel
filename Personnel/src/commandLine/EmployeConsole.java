@@ -90,9 +90,11 @@ public class EmployeConsole
 		Menu menu = new Menu("editer " + employe.getNom(), "f");
 		menu.add(afficher(employe));
 		menu.add(editerEmploye(employe));
+//		menu.add(supprimerEmployes(employe));
 		menu.addBack("q");
 		return menu;
 		
 	}
+	
 	
 }
