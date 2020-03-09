@@ -322,7 +322,7 @@ public class Employe implements Serializable, Comparable<Employe>
              public String toString()
 
              {
-                           String res = nom + " " + prenom + " " + mail + " " + arrival + " (";
+                 String res = prenom + " " + nom + " " + mail + " " + arrival + " " + depart +" (";
 
                            if (estRoot())
 

@@ -16,7 +16,7 @@ import personnel.*;
      {
              Ligue ligue = new Ligue("champion");
              String mail = "fifa@gmail.com" ;
-             Employe employe = ligue.addEmploye("d�nim" ,"selima", "sbk@gmail.com", "sbk",null);
+             Employe employe = ligue.addEmploye("denim" ,"selima", "sbk@gmail.com", "sbk",LocalDate.now() );
              employe.setMail(mail);
              assertEquals(mail, employe.getMail());
             // System.out.println(employe.getMail());
@@ -26,7 +26,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue("champion");
 		 String mail =  "sbk@gmail.com";
-		 Employe employe = ligue.addEmploye("d�nim" ,"selima",mail, "sbk", null);
+		 Employe employe = ligue.addEmploye("denim" ,"selima",mail, "sbk", LocalDate.now());
          assertEquals(mail, employe.getMail());
 	//System.out.println(employe.getMail());	 
 		 
@@ -38,7 +38,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue("champion");
 		 String password = "million";
-		 Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com","qwerty", null);
+		 Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com","qwerty", LocalDate.now());
 		 employe.setPassword(password);
 		 assertTrue(employe.checkPassword(password));
 	 }
@@ -47,7 +47,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue ("champion"); 
 		 String prenom = "lebron";
-		 Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com", "qwerty", null);
+		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com", "qwerty", LocalDate.now());
 		 employe.setPrenom(prenom);
 		 assertEquals(prenom, employe.getPrenom());	 
 		 
@@ -57,7 +57,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue("champion");
 		 String prenom = "selima" ;
-		 Employe employe = ligue.addEmploye("d�nim" ,prenom,"sbk@gmail.com", "sbk", null);
+		 Employe employe = ligue.addEmploye("denim" ,prenom,"sbk@gmail.com", "sbk", LocalDate.now());
          assertEquals(prenom, employe.getPrenom());
 	   //System.out.println(employe.getPrenom());	 
 		 
@@ -68,7 +68,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue ("champion");
 		 String nom = "james" ;
-		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com", "qwerty", null);
+		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com", "qwerty", LocalDate.now());
 		 employe.setNom(nom);
 		 assertEquals(nom, employe.getNom());	 
 		  
@@ -78,7 +78,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue("champion");
 		 String nom = "denim" ;
-		 Employe employe = ligue.addEmploye(nom ,"selima","sbk@gmail.com", "sbk", null);
+		 Employe employe = ligue.addEmploye(nom ,"selima","sbk@gmail.com", "sbk",LocalDate.now());
          assertEquals(nom, employe.getNom());
 	 //  System.out.println(employe.getNom());	 
 		 
@@ -87,7 +87,7 @@ import personnel.*;
 	 void testgetLigue() {
 		 
 		 Ligue ligue = new Ligue("champion");
-		 Employe employe = ligue.addEmploye("denim"  ,"selima","sbk@gmail.com", "sbk", null);
+		 Employe employe = ligue.addEmploye("denim"  ,"selima","sbk@gmail.com", "sbk", LocalDate.now());
 		 employe.getLigue();
          assertEquals(ligue, employe.getLigue());
 	  // System.out.println(employe.getLigue());	 
@@ -98,7 +98,7 @@ import personnel.*;
 	 void testcheckPassword() {
 		 Ligue ligue = new Ligue("champion");
 		 String password = "qwerty";
-		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com",password, null);
+		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com",password, LocalDate.now());
 		 employe.checkPassword(password);
 		 assertTrue(employe.checkPassword(password));
 		 
@@ -110,7 +110,7 @@ import personnel.*;
 		 
 		 Ligue ligue = new Ligue("Fléchettes");
 		 Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
-		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com","qwerty", null);
+		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com","qwerty", LocalDate.now());
          assertTrue(root.estRoot());
          assertFalse(employe.estRoot());
 		 
@@ -121,8 +121,8 @@ import personnel.*;
 	 void testEstAdmin() {
 		 Ligue ligue = new Ligue ("champion");
 		 Ligue ligue1 = new Ligue("Fléchettes");
-		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com","qwerty", null);
-		 Employe employe2 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null);
+		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com","qwerty", LocalDate.now());
+		 Employe employe2 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
 		ligue.setAdministrateur(employe);
 		 assertTrue(employe.estAdmin(ligue));
 		 assertFalse(employe.estAdmin(ligue1));
@@ -135,8 +135,8 @@ import personnel.*;
      void testCompareTo()
      {
              Ligue ligue = new Ligue("Fléchettes");
-             Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com", "qwerty", null);
-             Employe employe2 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null);
+             Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com", "qwerty", LocalDate.now());
+             Employe employe2 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
              employe.compareTo(employe2);
              assertNotEquals(employe.getNom(), employe2.getNom());
      }
@@ -144,7 +144,7 @@ import personnel.*;
      void testRemove()
      {
              Ligue ligue = new Ligue("Fléchettes");
-             Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null);
+             Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now());
              Employe employe2 = GestionPersonnel.getGestionPersonnel().getRoot();
              ligue.setAdministrateur(employe);
              employe.remove();
@@ -156,7 +156,7 @@ import personnel.*;
 	 @Test
 	 void testToString() {
 		 Ligue ligue = new Ligue("champion");
-		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null);
+		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
 		 
 		 assertEquals(ligue.toString(), ligue.getNom());
 		// System.out.println(ligue.getNom());
@@ -166,7 +166,7 @@ import personnel.*;
 	 void testSetArrival() {
 		 Ligue ligue = new Ligue("champion");
 		 LocalDate arrival = LocalDate.of(2017, 12, 15);
-		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",null);
+		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now());
 		 employe.setArrival(arrival);
 		 assertEquals(arrival, employe.getArrival());
 		// System.out.println(arrival); 
@@ -195,7 +195,7 @@ import personnel.*;
 	 void testSetDepart() {
 		 Ligue ligue = new Ligue("champion");
 		 LocalDate depart = LocalDate.of(2017, 12, 15);
-		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",null);
+		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now());
 		 employe.setDepart(depart);
 		 assertEquals(depart, employe.getDepart());
 		// System.out.println(depart); 
