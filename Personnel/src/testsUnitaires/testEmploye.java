@@ -16,7 +16,7 @@ import personnel.*;
      {
              Ligue ligue = new Ligue("champion");
              String mail = "fifa@gmail.com" ;
-             Employe employe = ligue.addEmploye("d�nim" ,"selima", "sbk@gmail.com", "sbk",null );
+             Employe employe = ligue.addEmploye("d�nim" ,"selima", "sbk@gmail.com", "sbk",null);
              employe.setMail(mail);
              assertEquals(mail, employe.getMail());
             // System.out.println(employe.getMail());
