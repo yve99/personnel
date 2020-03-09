@@ -94,7 +94,7 @@ public class EmployeConsole
 				);
 	}
 	
-	Menu selectEmployer(Employe employe) {
+	Menu choisirEmploye(Employe employe) {
 		Menu menu = new Menu("editer " + employe.getNom(), "f");
 		menu.add(afficher(employe));
 		menu.add(editerEmploye(employe));
