@@ -1,2 +1,3 @@
 /bin
 /GestionPersonnel.srz
+../sql/DBConnect.java
