@@ -62,11 +62,30 @@ public class LigueConsole
 		Menu menu = new Menu("Editer " + ligue.getNom());
 		menu.add(afficher(ligue));
 		menu.add(gererEmployes(ligue));
-		//menu.add(changerAdministrateur(ligue));
+		menu.add(changerAdministrateur(ligue));
+		menu.add(afficherAdministrateur(ligue));
 		menu.add(changerNom(ligue));
 		menu.add(supprimer(ligue));
 		menu.addBack("q");
 		return menu;
+	}
+    
+	private Option afficherAdministrateur(final Ligue ligue)
+	{
+		return new Option("Afficher l'admin", "u",
+		() -> {System.out.println(ligue.getAdministrateur());});
+	}
+//	private Menu changerAdmin(Ligue ligue) {
+//		Menu menu = new Menu("changer l'admin de " + ligue.getNom());
+//		menu.add(changerAdministrateur(ligue));
+//		return menu;
+//	}
+	private List<Employe> changerAdministrateur(final Ligue ligue)
+	{
+		return new List<>("changer l'administrateur", "n", 
+				() -> new ArrayList<>(ligue.getEmployes()),
+				(index, element) -> {ligue.setAdministrateur(element);}
+				);
 	}
 
 	private Option changerNom(final Ligue ligue)
@@ -82,14 +101,6 @@ public class LigueConsole
 				(element) -> editerLigue(element)
 				);
 	}
-
-	 private List<Employe> selectEmploye( Ligue ligue)
-		{
-			return new List<Employe>("Sélectionner un employe", "e", 
-					() -> new ArrayList<>(ligue.getEmployes()),
-					(element) ->employeConsole.selectEmployer(element)
-					);
-		}	
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
@@ -108,11 +119,17 @@ public class LigueConsole
 		Menu menu = new Menu("Gérer les employés de " + ligue.getNom(), "e");
 		menu.add(afficherEmployes(ligue));
 		menu.add(ajouterEmploye(ligue));
-		menu.add(selectEmploye(ligue));
+		menu.add(selectionnerEmploye(ligue));
 		menu.addBack("q");
 		return menu;
 	}
-	
+	 private List<Employe> selectionnerEmploye( Ligue ligue)
+		{
+			return new List<Employe>("Sélectionner un employe", "e", 
+					() -> new ArrayList<>(ligue.getEmployes()),
+					(element) ->employeConsole.choisirEmploye(element)
+					);
+		}
 
 	private List<Employe> supprimerEmploye(final Ligue ligue)
 	{
@@ -122,10 +139,7 @@ public class LigueConsole
 				);
 	}
 	
-	//private List<Employe> changerAdministrateur(final Ligue ligue)
-	//{
-		//return null;
-//	}		
+	
 
 	private List<Employe> modifierEmploye(final Ligue ligue)
 	{
