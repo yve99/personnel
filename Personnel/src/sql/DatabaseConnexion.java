@@ -40,6 +40,21 @@ public class DatabaseConnexion implements personnel.Passerelle{
 		{
 			System.out.println(e);
 		}
+		try
+		{
+			String requete = "select * from employe";
+			Statement instruction = connect.createStatement();
+			ResultSet result = instruction.executeQuery(requete);
+			while (result.next())
+				System.out.println(result.getInt("id_employe")+"\t"+result.getString("nom")+"\t"+
+			   result.getString("prenom")+"\t"+result.getString("mail")+"\t"+result.getString("mdp")+
+			    "\t"+result.getDate("date_arrival")+"\t"+result.getDate("date_depart")+"\t"+result.getInt("level"));	
+		 
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+		}
 		return gestionPersonnel;
 	}
 	@Override
