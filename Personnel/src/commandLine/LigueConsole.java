@@ -63,23 +63,19 @@ public class LigueConsole
 		menu.add(afficher(ligue));
 		menu.add(gererEmployes(ligue));
 		menu.add(changerAdministrateur(ligue));
-		menu.add(afficherAdministrateur(ligue));
+//		menu.add(afficherAdministrateur(ligue));
 		menu.add(changerNom(ligue));
 		menu.add(supprimer(ligue));
 		menu.addBack("q");
 		return menu;
 	}
     
-	private Option afficherAdministrateur(final Ligue ligue)
-	{
-		return new Option("Afficher l'admin", "u",
-		() -> {System.out.println(ligue.getAdministrateur());});
-	}
-//	private Menu changerAdmin(Ligue ligue) {
-//		Menu menu = new Menu("changer l'admin de " + ligue.getNom());
-//		menu.add(changerAdministrateur(ligue));
-//		return menu;
+//	private Option afficherAdministrateur(final Ligue ligue)
+//	{
+//		return new Option("Afficher l'admin", "u",
+//		() -> {System.out.println(ligue.getAdministrateur());});
 //	}
+
 	private List<Employe> changerAdministrateur(final Ligue ligue)
 	{
 		return new List<>("changer l'administrateur", "n", 
