@@ -35,36 +35,25 @@ public class Employe implements Serializable, Comparable<Employe>
              private LocalDate depart;
 
              private Ligue ligue;
+             private GestionPersonnel gestionPersonnel;
 
- public Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate arrival) { 
+public Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate arrival) { 
 
-               this.nom = nom;
-
+                           this.nom = nom;
                            this.prenom = prenom;
-
                            this.password = password;
-
                            this.mail = mail;
-
                            this.ligue = ligue;
-
                            this.arrival= arrival;
-
+                           this.gestionPersonnel = gestionPersonnel;
              }
              /**
-
              * Retourne vrai ssi l'employé est administrateur de la ligue
-
               * passée en paramètre.
-
              * @return vrai ssi l'employé est administrateur de la ligue
-
               * passée en paramètre.
-
              * @param ligue la ligue pour laquelle on souhaite vérifier si this
-
               * est l'admininstrateur.
-
              */
 
              public boolean estAdmin(Ligue ligue)
@@ -76,12 +65,8 @@ public class Employe implements Serializable, Comparable<Employe>
              /**
 
              * Retourne vrai ssi l'employé est le root.
-
              * @return vrai ssi l'employé est le root.
-
              */
-
-            
 
              public boolean estRoot()
 
@@ -94,54 +79,32 @@ public class Employe implements Serializable, Comparable<Employe>
             
 
              /**
-
              * Retourne le nom de l'employé.
-
              * @return le nom de l'employé.
-
               */
-
-            
 
              public String getNom()
 
              {
-
                            return nom;
-
              }
 
- 
 
              /**
-
              * Change le nom de l'employé.
-
              * @param nom le nouveau nom.
-
              */
-
-            
 
              public void setNom(String nom)
 
              {
-
                            this.nom = nom;
-
              }
-
- 
-
+             
              /**
-
              * Retourne le prénom de l'employé.
-
              * @return le prénom de l'employé.
-
              */
-
-            
 
              public String getPrenom()
 

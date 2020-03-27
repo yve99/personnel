@@ -10,11 +10,11 @@ import personnel.*;
 
  class testEmploye {
 	 
-	 
+	 GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	 @Test
-     void testSetMail()
+     void testSetMail() throws SauvegardeImpossible
      {
-             Ligue ligue = new Ligue("champion");
+             Ligue ligue = gestionPersonnel.addLigue("champion");
              String mail = "fifa@gmail.com" ;
              Employe employe = ligue.addEmploye("denim" ,"selima", "sbk@gmail.com", "sbk",LocalDate.now() );
              employe.setMail(mail);
@@ -22,9 +22,10 @@ import personnel.*;
             // System.out.println(employe.getMail());
      }
 	 @Test
-	 void testgetMail() {
+	 void testgetMail() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue("champion");
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 String mail =  "sbk@gmail.com";
 		 Employe employe = ligue.addEmploye("denim" ,"selima",mail, "sbk", LocalDate.now());
          assertEquals(mail, employe.getMail());
@@ -33,19 +34,20 @@ import personnel.*;
 	 }
 	  
 	 @Test
-	 void testSetPassword()
+	 void testSetPassword() throws SauvegardeImpossible
 	 {
 		 
-		 Ligue ligue = new Ligue("champion");
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 String password = "million";
 		 Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com","qwerty", LocalDate.now());
 		 employe.setPassword(password);
 		 assertTrue(employe.checkPassword(password));
 	 }
 	 @Test
-	 void testsetPrenom() {
+	 void testsetPrenom() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue ("champion"); 
+		 Ligue ligue = gestionPersonnel.addLigue ("champion"); 
 		 String prenom = "lebron";
 		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com", "qwerty", LocalDate.now());
 		 employe.setPrenom(prenom);
@@ -53,9 +55,10 @@ import personnel.*;
 		 
 	 }
 	 @Test
-	 void testgetPrenom() {
+	 void testgetPrenom() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue("champion");
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 String prenom = "selima" ;
 		 Employe employe = ligue.addEmploye("denim" ,prenom,"sbk@gmail.com", "sbk", LocalDate.now());
          assertEquals(prenom, employe.getPrenom());
@@ -64,9 +67,10 @@ import personnel.*;
 	 }
 	
 	 @Test
-	 void testSetNom() {
+	 void testSetNom() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue ("champion");
+		 Ligue ligue = gestionPersonnel.addLigue ("champion");
 		 String nom = "james" ;
 		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com", "qwerty", LocalDate.now());
 		 employe.setNom(nom);
@@ -74,9 +78,10 @@ import personnel.*;
 		  
 	 }
 	 @Test
-	 void testgetNom() {
+	 void testgetNom() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue("champion");
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 String nom = "denim" ;
 		 Employe employe = ligue.addEmploye(nom ,"selima","sbk@gmail.com", "sbk",LocalDate.now());
          assertEquals(nom, employe.getNom());
@@ -84,9 +89,10 @@ import personnel.*;
 		 
 	 }
 	 @Test
-	 void testgetLigue() {
+	 void testgetLigue() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue("champion");
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 Employe employe = ligue.addEmploye("denim"  ,"selima","sbk@gmail.com", "sbk", LocalDate.now());
 		 employe.getLigue();
          assertEquals(ligue, employe.getLigue());
@@ -95,8 +101,9 @@ import personnel.*;
 	 }
 	 
 	 @Test
-	 void testcheckPassword() {
-		 Ligue ligue = new Ligue("champion");
+	 void testcheckPassword() throws SauvegardeImpossible
+	 {
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 String password = "qwerty";
 		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com",password, LocalDate.now());
 		 employe.checkPassword(password);
@@ -106,9 +113,10 @@ import personnel.*;
 		  
 	 }
 	 @Test
-	 void testEstRoot() {
+	 void testEstRoot() throws SauvegardeImpossible
+	 {
 		 
-		 Ligue ligue = new Ligue("Fléchettes");
+		 Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		 Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
 		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com","qwerty", LocalDate.now());
          assertTrue(root.estRoot());
@@ -118,9 +126,10 @@ import personnel.*;
 		 
 	 }
 	 @Test
-	 void testEstAdmin() {
-		 Ligue ligue = new Ligue ("champion");
-		 Ligue ligue1 = new Ligue("Fléchettes");
+	 void testEstAdmin() throws SauvegardeImpossible
+	 {
+		 Ligue ligue = gestionPersonnel.addLigue ("champion");
+		 Ligue ligue1 = gestionPersonnel.addLigue("Fléchettes");
 		 Employe employe = ligue.addEmploye("denim", "selima", "sbk@gmail.com","qwerty", LocalDate.now());
 		 Employe employe2 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
 		ligue.setAdministrateur(employe);
@@ -132,18 +141,18 @@ import personnel.*;
 		 
 	 }
 	 @Test
-     void testCompareTo()
+     void testCompareTo() throws SauvegardeImpossible
      {
-             Ligue ligue = new Ligue("Fléchettes");
+             Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
              Employe employe = ligue.addEmploye("d�nim", "selima", "sbk@gmail.com", "qwerty", LocalDate.now());
              Employe employe2 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
              employe.compareTo(employe2);
              assertNotEquals(employe.getNom(), employe2.getNom());
      }
 	 @Test
-     void testRemove()
+     void testRemove() throws SauvegardeImpossible
      {
-             Ligue ligue = new Ligue("Fléchettes");
+             Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
              Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now());
              Employe employe2 = GestionPersonnel.getGestionPersonnel().getRoot();
              ligue.setAdministrateur(employe);
@@ -154,8 +163,9 @@ import personnel.*;
             
      }
 	 @Test
-	 void testToString() {
-		 Ligue ligue = new Ligue("champion");
+	 void testToString() throws SauvegardeImpossible
+	 {
+		 Ligue ligue =gestionPersonnel.addLigue("champion");
 		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
 		 
 		 assertEquals(ligue.toString(), ligue.getNom());
@@ -163,8 +173,9 @@ import personnel.*;
 		  
 	 } 
 	 @Test
-	 void testSetArrival() {
-		 Ligue ligue = new Ligue("champion");
+	 void testSetArrival() throws SauvegardeImpossible
+	 {
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 LocalDate arrival = LocalDate.of(2017, 12, 15);
 		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now());
 		 employe.setArrival(arrival);
@@ -174,8 +185,9 @@ import personnel.*;
 	}
 	
 	 @Test
-		void testGetDepart() {
-			Ligue ligue = new Ligue("Fléchettes");
+		void testGetDepart() throws SauvegardeImpossible
+	 {
+			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 			LocalDate arrival = LocalDate.of(2019, 01, 20);
 			LocalDate today = LocalDate.of(2020, 01, 20);
 			Employe employe = ligue.addEmploye("selima", "bk", "sbk@gmail.com", "pass", arrival);
@@ -184,16 +196,18 @@ import personnel.*;
 		}
 	 
 	 @Test
-		void testGetArrival() {
-			Ligue ligue = new Ligue("Fléchettes");
+		void testGetArrival() throws SauvegardeImpossible
+	 {
+			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 			LocalDate date = LocalDate.of(2019,02 ,20);
 			Employe employe = ligue.addEmploye("selima", "bk", "sbk@gmail.com", "pass", date);	
 			assertEquals(employe.getArrival(), date);
 		//System.out.println(employe.getArrival());	
 		}
 	 @Test
-	 void testSetDepart() {
-		 Ligue ligue = new Ligue("champion");
+	 void testSetDepart() throws SauvegardeImpossible
+	 {
+		 Ligue ligue = gestionPersonnel.addLigue("champion");
 		 LocalDate depart = LocalDate.of(2017, 12, 15);
 		 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now());
 		 employe.setDepart(depart);
