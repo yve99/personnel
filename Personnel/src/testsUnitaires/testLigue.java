@@ -21,6 +21,7 @@ class testLigue
         {       
         	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
                 assertEquals("Fléchettes", ligue.getNom());
+                System.out.println(ligue.getNom());
         }
 
         @Test
