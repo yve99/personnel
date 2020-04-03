@@ -40,21 +40,21 @@ public class DatabaseConnexion implements personnel.Passerelle{
 		{
 			System.out.println(e);
 		}
-		try
-		{
-			String requete = "select * from employe";
-			Statement instruction = connect.createStatement();
-			ResultSet result = instruction.executeQuery(requete);
-			while (result.next())
-				System.out.println(result.getInt("id_employe")+"\t"+result.getString("nom")+"\t"+
-			   result.getString("prenom")+"\t"+result.getString("mail")+"\t"+result.getString("mdp")+
-			    "\t"+result.getDate("date_arrival")+"\t"+result.getDate("date_depart")+"\t"+result.getInt("level"));	
-		 
-		}
-		catch(SQLException e)
-		{
-			System.out.println(e);
-		}
+//		try
+//		{
+//			String requete = "select * from employe";
+//			Statement instruction = connect.createStatement();
+//			ResultSet result = instruction.executeQuery(requete);
+//			while (result.next())
+//				System.out.println(result.getInt("id_employe")+"\t"+result.getString("nom")+"\t"+
+//			   result.getString("prenom")+"\t"+result.getString("mail")+"\t"+result.getString("mdp")+
+//			    "\t"+result.getDate("date_arrival")+"\t"+result.getDate("date_depart")+"\t"+result.getInt("level"));	
+//		 
+//	}
+//		catch(SQLException e)
+//		{
+//			System.out.println(e);
+//		}
 		return gestionPersonnel;
 	}
 	@Override
@@ -67,7 +67,9 @@ public class DatabaseConnexion implements personnel.Passerelle{
 		{
 			if (connect != null)
 				connect.close();
+			
 		}
+		
 		catch (SQLException e)
 		{
 			throw new SauvegardeImpossible(e);
@@ -78,17 +80,52 @@ public class DatabaseConnexion implements personnel.Passerelle{
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connect.prepareStatement("insert into ligue (nom) values(?)", Statement.RETURN_GENERATED_KEYS);
+			instruction = connect.prepareStatement("insert into ligue (nom_ligue) values(?)", Statement.RETURN_GENERATED_KEYS);
 			instruction.setString(1, ligue.getNom());		
 			instruction.executeUpdate();
 			ResultSet id = instruction.getGeneratedKeys();
 			id.next();
 			return id.getInt(1);
 		} 
+		
 		catch (SQLException exception) 
 		{
 			exception.printStackTrace();
 			throw new SauvegardeImpossible(exception);
-		}		
+		}	
+		
+			
 	}
+	public void update(Ligue ligue) throws SauvegardeImpossible 
+	{
+		
+		try 
+		{
+			PreparedStatement instruction;
+			 String sql = "UPDATE ligue " +
+	                   "SET nom_ligue = ? WHERE id_ligue = ?";
+		    instruction = connect.prepareStatement(sql);
+		    instruction.executeUpdate();
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new SauvegardeImpossible(e);
+		}
+	}
+	public void delete(Ligue ligue) throws SauvegardeImpossible
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			String sql = "DELETE FROM  ligue WHERE nom_ligue=?";
+			instruction = connect.prepareStatement(sql);
+			instruction.executeUpdate();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new SauvegardeImpossible(e);
+		}
+	}
+	
 }

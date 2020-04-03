@@ -96,7 +96,7 @@ import personnel.*;
 		 Employe employe = ligue.addEmploye("denim"  ,"selima","sbk@gmail.com", "sbk", LocalDate.now());
 		 employe.getLigue();
          assertEquals(ligue, employe.getLigue());
-	  // System.out.println(employe.getLigue());	 
+	   //System.out.println(employe.getLigue());	 
 		 
 	 }
 	 

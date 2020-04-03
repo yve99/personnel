@@ -21,7 +21,7 @@ class testLigue
         {       
         	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
                 assertEquals("Fléchettes", ligue.getNom());
-                System.out.println(ligue.getNom());
+//                System.out.println(ligue.getNom());
         }
 
         @Test
@@ -54,7 +54,7 @@ class testLigue
         {
                 Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
                 Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now());
-                employe.remove();
+                ligue.remove();
                 assertFalse(ligue.getEmployes().contains(employe));
                 assertNull(employe.getLigue());
               //  assertFalse(employe.getLigue().contains(ligue));
@@ -109,7 +109,7 @@ class testLigue
     	 Employe employe = ligue.addEmploye("denim" ,"selima","sbk@gmail.com", "sbk", LocalDate.now());
     	 ligue.setAdministrateur(employe);
     	 assertEquals(employe, ligue.getAdministrateur());
-    	System.out.println(ligue.getAdministrateur()); 	 
+//    	System.out.println(ligue.getAdministrateur()); 	 
      }
 	 
 }
