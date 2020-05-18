@@ -1,9 +1,12 @@
 package personnel;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import personnel.Employe;
 
 /**
  * Gestion du personnel. Un seul objet de cette classe existe.
@@ -20,7 +23,8 @@ public class GestionPersonnel implements Serializable
 	private static final long serialVersionUID = -105283113987886425L;
 	private static GestionPersonnel gestionPersonnel = null;
 	private SortedSet<Ligue> ligues;
-	private Employe root = new Employe(this, null, "root", "", "", "toor", null);
+	private SortedSet<Employe> employes;
+	private Employe root = new Employe(this, -1 , "root", "", "", "toor", null);
 	public final static int SERIALIZATION = 1, DatabaseConnexion = 2, 
 			TYPE_PASSERELLE = DatabaseConnexion;  
 	private static Passerelle passerelle = TYPE_PASSERELLE == DatabaseConnexion ? new sql.DatabaseConnexion() : new serialisation.Serialization();	
@@ -91,7 +95,6 @@ public class GestionPersonnel implements Serializable
 		ligues.add(ligue);
 		return ligue;
 	}
-	
 
 	void remove(Ligue ligue)
 	{
@@ -101,13 +104,26 @@ public class GestionPersonnel implements Serializable
 	{
 		return passerelle.insert(ligue);
 	}
-//	void update(Ligue ligue) throws SauvegardeImpossible{
-//		return passerelle.update(ligue);
-//	}
-//	void delete(Ligue ligue) throws SauvegardeImpossible{
-//		return passerelle.delete(ligue);
-//	}
-
+	int insert(Employe employe)throws SauvegardeImpossible
+	{
+		return passerelle.insert(employe);
+	}
+	int update(Ligue ligue) throws SauvegardeImpossible{
+		return passerelle.update(ligue);
+		
+	}
+	int delete(Ligue ligue) throws SauvegardeImpossible{
+		return passerelle.delete(ligue);
+	}
+	int update (Employe employe)throws SauvegardeImpossible{
+		return passerelle.update(employe);
+		
+	}
+	int delete (Employe employe)throws SauvegardeImpossible{
+		return passerelle.delete(employe);
+		
+	}
+	
 	/**
 	 * Retourne le root (super-utilisateur).
 	 * @return le root.
@@ -117,4 +133,23 @@ public class GestionPersonnel implements Serializable
 	{
 		return root;
 	}
+
+	public void addEmploye(int id, String nom, String prenom, String mail, String mdp, Date arrival) {
+		
+		
+	}
+
+//	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate arrival) throws SauvegardeImpossible
+//	{
+//		Employe employe = new Employe(id,nom, prenom, mail, password, arrival);
+//		employes.add(employe);
+//		return employe;
+//	}
+//
+//	public Employe addEmploye(int id,String nom, String prenom, String mail, String password, LocalDate arrival) {
+//		Employe employe = new Employe(this,id,nom, prenom, mail, password, arrival);
+//		employes.add(employe);
+//		return employe;
+//		
+//	}
 }

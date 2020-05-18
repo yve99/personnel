@@ -1,12 +1,11 @@
 package personnel;
 
- 
-
 import java.io.Serializable;
-
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
- 
 
 /**
 
@@ -30,23 +29,41 @@ public class Employe implements Serializable, Comparable<Employe>
              private static final long serialVersionUID = 4795721718037994734L;
 
              private String nom, prenom, password, mail;
-
              private LocalDate arrival;
              private LocalDate depart;
-
+             private int id = -1;
              private Ligue ligue;
              private GestionPersonnel gestionPersonnel;
 
-public Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate arrival) { 
-
-                           this.nom = nom;
-                           this.prenom = prenom;
-                           this.password = password;
-                           this.mail = mail;
-                           this.ligue = ligue;
-                           this.arrival= arrival;
-                           this.gestionPersonnel = gestionPersonnel;
-             }
+             public Employe(GestionPersonnel gestionPersonnel, String nom, String prenom, String mail, String password,LocalDate arrival) throws SauvegardeImpossible  {
+        		this(gestionPersonnel, -1, nom, prenom,mail,password,arrival);
+        		this.id = gestionPersonnel.insert(this);
+        	}
+        	 public Employe(GestionPersonnel gestionPersonnel, int id, String nom, String prenom,
+        			 String mail, String password, LocalDate arrival) {
+        		 this.nom=nom;
+        		 this.prenom = prenom;
+                 this.password = password;
+                 this.mail = mail;
+                 this.arrival= arrival;
+                 this.ligue=ligue;
+                 this.gestionPersonnel = gestionPersonnel;
+                 this.id=id;
+        		
+        	} 
+                
+             
+             
+//public Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate arrival) { 
+//
+//                           this.nom = nom;
+//                           this.prenom = prenom;
+//                           this.password = password;
+//                           this.mail = mail;
+//                           this.ligue = ligue;
+//                           this.arrival= arrival;
+//                          this.gestionPersonnel = gestionPersonnel;
+//            }
              /**
              * Retourne vrai ssi l'employé est administrateur de la ligue
               * passée en paramètre.
@@ -326,6 +343,12 @@ public Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, Strin
              public void setDepart(LocalDate depart) {
 
                            this.depart = depart;
+             }
+             /** retourne le mot de passe de l'employé
+              * @return le mot de passe de l'employé */
+             public String getPassword() {
+	
+	             return password;
              }
 
 }
